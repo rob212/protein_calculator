@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 @Service
 public class ProteinCalculator {
 
-    public float calculate(float weight) {
+    public float calculate(float weight) throws IllegalArgumentException {
         if (weight < 0) {
             throw new IllegalArgumentException("weight must be a positive number.");
         }
