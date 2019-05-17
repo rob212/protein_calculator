@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
@@ -24,14 +26,16 @@ public class ProteinCalculatorApplicationTests {
 
 	@Test
 	public void proteinCalculatorShouldByAvailableViaValidHTTPGet() {
-		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/calc?weight=68",
-		String.class)).contains("54.4");
+		ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calc?weight=68", String.class);
+		assertThat(response.getBody()).contains("54.4");
+		assertThat(response.getStatusCode().equals(HttpStatus.OK));
 	}
 
 	@Test
 	public void proteinCalculatorShouldReturnErrorForInvalidInputParamHTTPGet() {
-		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/calc?weight=-12", String.class))
-				.contains("weight must be a positive number.");
+		ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calc?weight=-12", String.class);
+		assertThat(response.getBody()).contains("weight must be a positive number.");
+		assertThat(response.getStatusCode().equals(HttpStatus.BAD_REQUEST));
 	}
 
 }
