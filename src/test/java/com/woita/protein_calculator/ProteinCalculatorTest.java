@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnitParamsRunner.class)
 public class ProteinCalculatorTest {
     private ProteinCalculator proteinCalc = new ProteinCalculator();
-
+    
     @Test
     @Parameters({ 
         "0.0f, 0.0f", 

@@ -13,7 +13,7 @@ class ProteinCalculatorController {
     @Autowired
     private ProteinCalculator proteinCalculator;
 
-    @RequestMapping("/calc")
+   @RequestMapping("/calc")
     ResponseEntity<String> calc(@RequestParam("weight") float weight) {
         try {
             String proteinResponse = String.valueOf(proteinCalculator.calculate(weight));
