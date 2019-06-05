@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.4.RELEASE'
 	id 'java'
 	id 'jacoco'
+	id "org.owasp.dependencycheck" version "5.0.0-M3.1"
 }
 
 jacoco {
@@ -22,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.0'
+	compile group: 'org.owasp.dependencycheck', name: 'org.owasp.dependencycheck.gradle.plugin', version: '4.0.2', ext: 'pom'
 }
 
 jacocoTestCoverageVerification {
@@ -32,4 +34,20 @@ jacocoTestCoverageVerification {
 			}
 		}
 	}
+}
+
+// OWASP Dependency Check settings
+dependencyCheck {
+
+    // let's ignore errors to make builds in Jenkins more stable
+    failOnError = false
+
+    // OWASP Dependency Check plugin for Jenkins needs an XML report,
+    // but humans may also need an HTML one
+    format = 'ALL'
+
+    // set up a quality gate for vulnerabilities with high severity level:
+    //   let's consider that a vulnerability has a high severity level if its CVSS score is higher than 7
+    //   the build is going to fail if vulnerabilities with high severity level found
+    failBuildOnCVSS = 7
 }
