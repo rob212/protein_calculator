@@ -28,14 +28,14 @@ public class ProteinCalculatorApplicationTests {
 	public void proteinCalculatorShouldByAvailableViaValidHTTPGet() {
 		ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calc?weight=68", String.class);
 		assertThat(response.getBody()).contains("54.4");
-		assertThat(response.getStatusCode().equals(HttpStatus.OK));
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
-
+	
 	@Test
 	public void proteinCalculatorShouldReturnErrorForInvalidInputParamHTTPGet() {
 		ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calc?weight=-12", String.class);
 		assertThat(response.getBody()).contains("weight must be a positive number.");
-		assertThat(response.getStatusCode().equals(HttpStatus.BAD_REQUEST));
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 	}
 
 }
