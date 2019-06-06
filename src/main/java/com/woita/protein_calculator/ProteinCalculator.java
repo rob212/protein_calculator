@@ -4,6 +4,12 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Protein Calculator 
+ * 
+ * Service that contains calculator to determine the daily recommended weight of protein in grams that should be consumed 
+ * per day based upon the users weight passed in as a float input in kg.
+ */
 @Service
 public class ProteinCalculator {
 
