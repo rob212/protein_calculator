@@ -6,7 +6,7 @@
 <module name="Checker">
     <module name="TreeWalker">
         <module name="MethodLength">
-            <property name="max" value="2"/>
+            <property name="max" value="30"/>
         </module>
      </module>
 </module>
