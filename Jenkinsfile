@@ -33,12 +33,16 @@ pipeline {
         stage("Static analysis") {
             steps {
                 sh "./gradlew checkstyleMain"
-                publishHTML (target: [
+            }
+        }
+    }
+     post { 
+        always { 
+            publishHTML (target: [
                     reportDir: 'build/reports/checkstyle',
                     reportFiles: 'main.html',
                     reportName: "Checkstyle Static Analsis Report"
                 ])
-            }
         }
     }
 }
