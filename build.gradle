@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.4.RELEASE'
 	id 'java'
 	id 'jacoco'
+	id 'checkstyle'
 }
 
 jacoco {
@@ -9,6 +10,7 @@ jacoco {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
 
 group = 'com.woita'
 version = '0.0.1-SNAPSHOT'
