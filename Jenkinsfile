@@ -35,6 +35,27 @@ pipeline {
                 sh "./gradlew checkstyleMain"
             }
         }
+
+         stage('Package') {
+            steps {
+                sh "./gradlew build"
+            }
+        }
+
+        stage("Docker build") {
+            steps {
+                sh "docker build -t rob212/calculator ."
+            }
+        }
+
+        stage('Docker push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh "docker login -u=$USERNAME --password-stdin=$PASSWORD"
+                    sh "docker push rob212/calculator"
+                }
+            }
+        }
     }
      post { 
         always { 
