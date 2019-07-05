@@ -51,8 +51,8 @@ pipeline {
         stage('Docker push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh "docker login -u${USERNAME} --password-stdin=${PASSWORD}"
-                    sh "docker push rob212/calculator"
+                    sh "docker login -u=${USERNAME} -p=${PASSWORD}"
+                    sh "docker push rob212/protein_calculator"
                 }
             }
         }
